@@ -33,7 +33,7 @@ export type InstitutionHistory = Institution & {
 };
 
 export type Rating = {
-  rating: number;
+  ratingValue: number;
   yearRated: number;
 };
 
@@ -41,8 +41,6 @@ export type RatedInstitutionHistory = InstitutionHistory & {
   rating: Rating;
 };
 
-// export type RankedInstitutionHistory = InstitutionHistory & {
-//   // rank: number;
-//   lastRanking: number;
-//   yearLastRank: number;
-// };
+export type RankedInstitutionHistory = RatedInstitutionHistory & {
+  rankPosition: number;
+};

@@ -31,10 +31,10 @@ Display and interact the data:
  - Show a list of subjects and which institutions you can study them at
 
 
-# Freds Notes
+# Fred's Notes
 
 ### Ideas for data. 
-Want to look at something actually useful - I would want to know. User Centric
+Want to look at something actually useful - I would want to know. User Centric.
 
 > At Time Higher Education our aim is give the best insights we can into higher education for both students and academics. 
 
@@ -46,38 +46,48 @@ Insight for Universities
 - Choose a subject. Find all the Universities that have studies that subject. See how their student rating for that subject have changed over time. 
 
 
-Plan: 
-Stage 1 - Student
-Stage 2 - More on Student if it's interesting. Otherwise University.
-
-
 ### Notes
 
-A submission is really an institution history data point
-A submission is many courses from 1 year. Not a catalog.
-All the data is from different dates! Has to have some kind of history.
-Are there courses missing some years?
-
+A submission is really an institution history data point.
+Are there subject dates missing in some years?
 
 What am I actually showcasing here? Less my ability come up with a useful insight and more my ability to write code.
 
 Going to Create a FE for interaction.
 
+Using material ui because it looks great and is very quick to set up. 
 
-### MVP 
+3 submission points have the same ID! I've just manually changed to have separate ids.
+
+
+### MVP Plan.
 
 Student Selects a subject. 
 - Filter all institution that do that subject. If there were many institution just take top 10 etc..
 - Order by student_rating (total students)
 - But give history and indication of incline / decline / steady (graph maybe?) For academic_papers, students_total, student_rating. 
-
-- Could give a 'match' rating which included a better score for increasing student_rating and funding for example
-
-
-### The data
-
-On the FE side of things I'd want just an array of ordered results. 
-
-On the BE side of things I'd want to create this array as cleanly as possible. Ie indexing into things etc.. not 10000 loops
+- Could give a 'match' rating which included a better score for increasing student_rating and funding for example.
 
 
+# Reflection at the end of the test.
+I've done what I do best which is take some complex data on the FE side of things and make into something useable information. Sorting ordering etc in data.ts. 
+
+What would of been a better approach would be to process this data into a DB. Then I can do things like create a subject entity. Use SQL to order and sort etc. Which is what it is made for.
+
+### Good points
+- I've sorted the data on the FE side in the best way to AVOID 10000000 loops. IE use an object/Record.
+
+- I've created something almost useful. The user can look at the rating trends themselves.
+
+- I've created a relatively nice ui for the user. Which would be a good start point for an app. Given more time. I would look at:
+    1. Creating more of a visual representation of how things have changed over time for these universities.
+    2. Adding an indication of trend. (Has the rating/funding etc gone up over the last 5 years).
+
+### Bad points
+- I have gone a bit broad. I've worked on making a useful app but the sorting filtering etc of data logic should live on the BE side. Then I've created a nice but limited FE. 
+  
+- The Data could be cleaner. Each institution in the final array has submissions with not just the chosen subject on it. With many more subjects the BE would be sending a lot of unnecessary data!
+
+- There is definitely room for a deeper dive into the set up of material ui. Learning more about theming etc and adding slight adjustments to built components using sx prop didn't look amazing.
+
+- My commits should of been smaller.  

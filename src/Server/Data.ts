@@ -1,18 +1,14 @@
 // This is a file to mimic the BE and what might come from it.
 
 import {
-  Institution,
   InstitutionHistoryRecord,
+  RankedInstitutionHistory,
   RatedInstitutionHistory,
   Rating,
   Submission,
 } from "../entityTypes";
 import submissions from "./submissions.json";
 import institutions from "./institutions.json";
-
-export const getSubmissions = (): Submission[] => submissions;
-
-export const getInstitutions = (): Institution[] => institutions;
 
 export const getSubjects = (): string[] => {
   let subjects: string[] = [];
@@ -46,9 +42,8 @@ export const getFullInstitutionHistory = (): InstitutionHistoryRecord => {
   return institutionHistory;
 };
 
-export const getSubjectRankedInstitutions = (chosenSubject: string): RatedInstitutionHistory[] => {
+export const getSubjectRankedInstitutions = (chosenSubject: string): RankedInstitutionHistory[] => {
   const fullHistory = getFullInstitutionHistory();
-
   const fullHistoryList = Object.values(fullHistory);
 
   // Filter institutions that have never had that subject
@@ -66,12 +61,12 @@ export const getSubjectRankedInstitutions = (chosenSubject: string): RatedInstit
           if (!subject) return acc;
 
           const subjectRanking: Rating = {
-            rating: subject.student_rating,
+            ratingValue: subject.student_rating,
             yearRated: cur.year,
           };
 
-          if (!cur || !acc) return acc;
-          if (cur.year > acc.yearRated) {
+          if (!cur) return acc;
+          if ((!!acc && cur.year > acc.yearRated) || (!acc && !!cur)) {
             return subjectRanking;
           }
           return acc;
@@ -79,19 +74,22 @@ export const getSubjectRankedInstitutions = (chosenSubject: string): RatedInstit
         undefined
       );
 
-      // REMOVE
+      // TODO REMOVE - emptyRating Technically should never reach this.
       return {
         ...institution,
-        rating: latestRating ?? {
-          rating: 0,
-          yearRated: 0,
-        },
+        rating: latestRating ?? emptyRating,
       };
     }
   );
 
-  // add the most recent to each entity
-  // const orderedHistoryList = filteredHistoryList.sort((a, b));
+  const rankedHistory: RankedInstitutionHistory[] = filteredHistoryListWithLatestRating
+    .sort((a, b) => b.rating.ratingValue - a.rating.ratingValue)
+    .map((item, index) => ({ ...item, rankPosition: index + 1 }));
 
-  return filteredHistoryListWithLatestRating;
+  return rankedHistory;
+};
+
+const emptyRating = {
+  ratingValue: 0,
+  yearRated: 0,
 };

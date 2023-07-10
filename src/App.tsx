@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { getSubjectRankedInstitutions, getSubjects } from "./Server/Data";
-import { styled } from "styled-components";
 import { FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 import { ResultCard } from "./Components/ResultCard";
+import { ResultsWrapper, SelectWrapper } from "./styles";
 
 const subjects = getSubjects();
 
@@ -20,9 +20,8 @@ function App() {
         THE Institution Reader
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        A university comparison app for your dream subject!
+        See the institute ranking for your subject!
       </Typography>
-
       <SelectWrapper>
         <FormControl fullWidth>
           <InputLabel id="subject-select">Subject</InputLabel>
@@ -51,14 +50,3 @@ function App() {
 }
 
 export default App;
-
-const SelectWrapper = styled.div`
-  width: 400px;
-  padding: 12px 0;
-`;
-
-export const ResultsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;

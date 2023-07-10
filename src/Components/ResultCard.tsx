@@ -4,46 +4,63 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { RatedInstitutionHistory } from "../entityTypes";
-import { ResultsWrapper } from "../App";
+import { RankedInstitutionHistory } from "../entityTypes";
+import { HeaderRow, RatingHistoryWrapper } from "../styles";
 
 export const ResultCard = ({
   result,
   selectedSubject,
 }: {
-  result: RatedInstitutionHistory;
+  result: RankedInstitutionHistory;
   selectedSubject: string;
 }) => {
   const [show, setShow] = useState(false);
+  const history = result.history.sort((a, b) => b.year - a.year);
+
   return (
     <Card variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {result.name}
-        </Typography>
+      <CardContent
+        sx={{
+          paddingBottom: 0,
+        }}
+      >
+        <HeaderRow>
+          <Typography variant="h4" component="div">
+            {result.rankPosition}.
+          </Typography>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{
+              marginBottom: "2px",
+            }}
+          >
+            {result.name} - {selectedSubject}
+          </Typography>
+        </HeaderRow>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {result.address}, {result.region}, {result.country}
         </Typography>
         <Typography variant="h6">
-          Student Rating: {result.rating.rating} ({result.rating.yearRated})
+          Last student rating: {result.rating.ratingValue} ({result.rating.yearRated})
         </Typography>
       </CardContent>
       <CardActions>
-        <ResultsWrapper>
+        <RatingHistoryWrapper>
           <Button size="small" onClick={() => setShow((val) => !val)}>
-            {show ? "Hide Rating History" : "See Rating History"}
+            {show ? "Hide Student Rating History" : "See Student Rating History"}
           </Button>
           {show &&
-            result.history.map((historyPoint) => {
-              const subject = historyPoint.subjects.find((sub) => sub.name === selectedSubject);
-
+            history.map((item) => {
+              const subject = item.subjects.find((sub) => sub.name === selectedSubject);
+              if (!subject) return null;
               return (
-                <div>
-                  {historyPoint.year} - {subject?.student_rating}
-                </div>
+                <Typography key={item.id} variant="body1">
+                  {item.year}: {subject.student_rating}
+                </Typography>
               );
             })}
-        </ResultsWrapper>
+        </RatingHistoryWrapper>
       </CardActions>
     </Card>
   );
