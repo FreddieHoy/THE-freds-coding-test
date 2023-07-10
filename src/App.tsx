@@ -1,17 +1,64 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
+import { getSubjectRankedInstitutions, getSubjects } from "./Server/Data";
+import { styled } from "styled-components";
+import { FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { ResultCard } from "./Components/ResultCard";
 
-import { getSubjects } from "./Server/Data";
+const subjects = getSubjects();
 
 function App() {
-  const subjects = getSubjects();
+  const [selected, setSelected] = useState<string | undefined>(undefined);
+
+  const results = useMemo(
+    () => (selected ? getSubjectRankedInstitutions(selected) : []),
+    [selected]
+  );
+
   return (
     <div className="App">
-      <h1>THE University Picker</h1>
-      {subjects.map((sub) => (
-        <p>{sub}</p>
-      ))}
+      <Typography variant="h1" component="h1">
+        THE Institution Reader
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        A university comparison app for your dream subject!
+      </Typography>
+
+      <SelectWrapper>
+        <FormControl fullWidth>
+          <InputLabel id="subject-select">Subject</InputLabel>
+          <Select
+            id="subject-select"
+            labelId="subject-select"
+            value={selected ?? ""}
+            label="Subject"
+            onChange={(e) => setSelected(e.target.value)}
+          >
+            {subjects.map((sub) => (
+              <MenuItem key={sub} value={sub}>
+                {sub}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </SelectWrapper>
+
+      <ResultsWrapper>
+        {selected &&
+          results.map((res) => <ResultCard key={res.id} result={res} selectedSubject={selected} />)}
+      </ResultsWrapper>
     </div>
   );
 }
 
 export default App;
+
+const SelectWrapper = styled.div`
+  width: 400px;
+  padding: 12px 0;
+`;
+
+export const ResultsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;

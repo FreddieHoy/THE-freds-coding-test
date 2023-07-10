@@ -53,6 +53,7 @@ Stage 2 - More on Student if it's interesting. Otherwise University.
 
 ### Notes
 
+A submission is really an institution history data point
 A submission is many courses from 1 year. Not a catalog.
 All the data is from different dates! Has to have some kind of history.
 Are there courses missing some years?
@@ -66,8 +67,17 @@ Going to Create a FE for interaction.
 ### MVP 
 
 Student Selects a subject. 
-- Filter all universities that do that subject. If there were many universities just take top 10 etc..
+- Filter all institution that do that subject. If there were many institution just take top 10 etc..
 - Order by student_rating (total students)
 - But give history and indication of incline / decline / steady (graph maybe?) For academic_papers, students_total, student_rating. 
 
 - Could give a 'match' rating which included a better score for increasing student_rating and funding for example
+
+
+### The data
+
+On the FE side of things I'd want just an array of ordered results. 
+
+On the BE side of things I'd want to create this array as cleanly as possible. Ie indexing into things etc.. not 10000 loops
+
+

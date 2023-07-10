@@ -25,3 +25,24 @@ export type Submission = {
   institution_income: number;
   subjects: Subject[];
 };
+
+export type InstitutionHistoryRecord = Record<string, InstitutionHistory>;
+
+export type InstitutionHistory = Institution & {
+  history: Submission[];
+};
+
+export type Rating = {
+  rating: number;
+  yearRated: number;
+};
+
+export type RatedInstitutionHistory = InstitutionHistory & {
+  rating: Rating;
+};
+
+// export type RankedInstitutionHistory = InstitutionHistory & {
+//   // rank: number;
+//   lastRanking: number;
+//   yearLastRank: number;
+// };
