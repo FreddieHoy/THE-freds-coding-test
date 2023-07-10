@@ -1,3 +1,5 @@
+See Fred's Notes below task outline!!!
+
 # Times Higher Education take home test
 
 At Time Higher Education our aim is give the best insights we can into higher education for both students and academics. In this test, we'd like to give you a taste of that and give you the opportunity to show us how you could improve this
@@ -91,3 +93,8 @@ What would of been a better approach would be to process this data into a DB. Th
 - There is definitely room for a deeper dive into the set up of material ui. Learning more about theming etc and adding slight adjustments to built components using sx prop didn't look amazing.
 
 - My commits should of been smaller.  
+
+
+### Overall 
+
+Really enjoyed this task! Felt like it could be something that adds value which is nice. Think with so much to play with here I think I got a little overwhelmed and just wanted to build a whole app straight away.
