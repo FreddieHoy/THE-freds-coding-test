@@ -1,4 +1,20 @@
-See Fred's Notes below task outline!!!
+# Getting started
+
+1. Git clone the repo locally. IE using SSH:
+> git clone git@github.com:FreddieHoy/THE-freds-coding-test.git
+
+2. Move into repo. 
+> cd the-freds-coding-test/
+ 
+3. install `node_modules`
+> npm install
+
+4. Start FE locally. 
+>npm run start
+
+---
+
+See Fred's Notes below task outline!
 
 # Times Higher Education take home test
 
@@ -32,7 +48,7 @@ Display and interact the data:
  - Display some submission data per institution for each year in either a table or chart
  - Show a list of subjects and which institutions you can study them at
 
-
+---
 # Fred's Notes
 
 ### Ideas for data. 
@@ -50,10 +66,9 @@ Insight for Universities
 
 ### Notes
 
-A submission is really an institution history data point.
-Are there subject dates missing in some years?
+A submission is really an institution history data.
 
-What am I actually showcasing here? Less my ability come up with a useful insight and more my ability to write code.
+Are there subject dates missing in some years? Yes.
 
 Going to Create a FE for interaction.
 
@@ -67,8 +82,7 @@ Using material ui because it looks great and is very quick to set up.
 Student Selects a subject. 
 - Filter all institution that do that subject. If there were many institution just take top 10 etc..
 - Order by student_rating (total students)
-- But give history and indication of incline / decline / steady (graph maybe?) For academic_papers, students_total, student_rating. 
-- Could give a 'match' rating which included a better score for increasing student_rating and funding for example.
+- But give history and for indication of incline / decline / steady (graph maybe?) For academic_papers, students_total, student_rating. 
 
 
 # Reflection at the end of the test.
